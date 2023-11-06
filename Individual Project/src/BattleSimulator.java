@@ -7,8 +7,9 @@ public class BattleSimulator
 
 		public static void main(String[] args)
 			{
-				System.out.println("Hello and welcome to the Java Pokémon Battle Simulator! \nNow please select the Pokémon you wish to play with: Bulbasaur(1), Charmander(2), Squirtle(3), Random Pokémon(4) .");
+				System.out.println("Hello and welcome to the Java Pokï¿½mon Battle Simulator! \nNow please select the Pokï¿½mon you wish to play with: Bulbasaur(1), Charmander(2), Squirtle(3), Random Pokï¿½mon(4) .");
 				//Super epic comment
+				//Comment from home!!!!
 			}
 
 	}
