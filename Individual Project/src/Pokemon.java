@@ -12,8 +12,9 @@ public class Pokemon
 		private int attack;
 		private int defense;
 		private int speed;
+		private int level;
 
-		public Pokemon(String n, Type t1, Type t2, Move m1, Move  m2, Move m3, Move m4, int h, int a, int d, int s)
+		public Pokemon(String n, Type t1, Type t2, Move m1, Move  m2, Move m3, Move m4, int h, int a, int d, int s, int l)
 		{
 			name = n;
 			type1 = t1;
@@ -24,7 +25,9 @@ public class Pokemon
 			move4 = m4;
 			hp = h;
 			attack = a;
+			defense =d;
 			speed = s;
+			level = l;
 		}
 		
 		public String getName()
@@ -82,6 +85,11 @@ public class Pokemon
 				return speed;
 			}
 		
+		public int getLevel()
+			{
+				return level;
+			}
+		
 		public void setName(String name)
 		{
 			this.name = name;
@@ -130,6 +138,11 @@ public class Pokemon
 		public void setDefense(int defense)
 			{
 				this.defense = defense;
+			}
+		
+		public void setLevel(int level)
+			{
+				this.level = level;
 			}
 		
 	}

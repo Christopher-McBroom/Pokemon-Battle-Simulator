@@ -37,13 +37,13 @@ public class BattleSimulator
 				switch(pokemonChoiceVar) {
 
 			      case 1: 	userPokemon = PokeDex.Bulbasuar;
-			    	  			System.out.println("choice 1");
+			    	  		
 			              break;
 			      case 2:userPokemon = PokeDex.Charmander;
-  	  			System.out.println("choice 2") ;
+  	 
 			              break;
 			      case 3: userPokemon = PokeDex.Squirtle;
-  	  			System.out.println("choice 3");
+  	  	
 			              break;
 			                        						}
 			}
@@ -57,13 +57,13 @@ public class BattleSimulator
 				switch(randomNumber) {
 
 			      case 0: 	oppPokemon = PokeDex.Bulbasuar;
-			    	  			System.out.println("choice 1");
+			    	  			
 			              break;
 			      case 1:oppPokemon = PokeDex.Charmander;
-  	  							System.out.println("choice 2") ;
+  	  							
 			              break;
 			      case 2: oppPokemon = PokeDex.Squirtle;
-  	  							System.out.println("choice 3");
+  	  						
 			              break;
 			                        						}
 		          
@@ -72,7 +72,23 @@ public class BattleSimulator
 		public static void pokemonBattle()
 		{
 			System.out.println("A battle has begun between " + userPokemon.getName() + " and " + oppPokemon.getName() + "!");
-			userMoveChoice();
+			
+			if(userPokemon.getSpeed() > oppPokemon.getSpeed())
+				{
+					
+					userMoveChoice();
+					winCondition();
+					oppMoveChoice();
+					winCondition();
+				}
+			
+			else if(userPokemon.getSpeed() < oppPokemon.getSpeed())
+				{
+					oppMoveChoice();
+					winCondition();
+					userMoveChoice();
+					winCondition();
+				}
 			
 		}
 		
@@ -82,7 +98,102 @@ public class BattleSimulator
 			System.out.println("Please select which attack you want to use: " + userPokemon.getMove1().getName()  +  "(1), " + userPokemon.getMove2().getName()  +  "(2), " + userPokemon.getMove3().getName()  +  "(3), " + userPokemon.getMove4().getName()  +  "(4)" );
 			int moveChoice = userInput.nextInt();
 			
+			int damageCalc1  = 2*userPokemon.getLevel()/5 + 2;
+			int damageCalc2;
+			int damage = 0;
+			
+			
+			switch(moveChoice) {
+
+		      case 1: 	damageCalc2 =  userPokemon.getMove1().getPower()*userPokemon.getAttack()/oppPokemon.getDefense();
+		      				damage = damageCalc1*damageCalc2 / 50 + 2;
+		    	  			break;
+		      case 2:damageCalc2 =  userPokemon.getMove2().getPower()*userPokemon.getAttack()/oppPokemon.getDefense();
+						damage = damageCalc1*damageCalc2 / 50 + 2;
+  							break;
+		      case 3: damageCalc2 =  userPokemon.getMove3().getPower()*userPokemon.getAttack()/oppPokemon.getDefense();
+							damage = damageCalc1*damageCalc2 / 50 + 2;
+  							break;
+		    
+		      case 4: 	damageCalc2 =  userPokemon.getMove4().getPower()*userPokemon.getAttack()/oppPokemon.getDefense();
+							damage = damageCalc1*damageCalc2 / 50 + 2;
+	  						break;  
+		                        						}
+			
+			int criticalHit = (int)(Math.random()*16) ;
+			
+			if(criticalHit == 15)
+				{
+					damage = damage*2;
+					oppPokemon.setHp(oppPokemon.getHp() - damage);
+				}
+		
+			else
+				{
+					oppPokemon.setHp(oppPokemon.getHp() - damage);
+				}
+					
+			
+				}
+				
+		public static void oppMoveChoice()
+			{
+
+				int moveChoice = (int)(Math.random()*4)+1 ;
+				
+				int damageCalc1  = 2*userPokemon.getLevel()/5 + 2;
+				int damageCalc2;
+				int damage = 0;
+				
+				
+				switch(moveChoice) {
+
+			      case 1: 	damageCalc2 =  oppPokemon.getMove1().getPower()*oppPokemon.getAttack()/userPokemon.getDefense();
+			      				damage = damageCalc1*damageCalc2 / 50 + 2;
+			    	  			break;
+			      case 2:damageCalc2 =  oppPokemon.getMove2().getPower()*oppPokemon.getAttack()/userPokemon.getDefense();
+							damage = damageCalc1*damageCalc2 / 50 + 2;
+	  							break;
+			      case 3: damageCalc2 =  oppPokemon.getMove3().getPower()*oppPokemon.getAttack()/userPokemon.getDefense();
+								damage = damageCalc1*damageCalc2 / 50 + 2;
+	  							break;
+			    
+			      case 4: 	damageCalc2 =  oppPokemon.getMove4().getPower()*oppPokemon.getAttack()/userPokemon.getDefense();
+								damage = damageCalc1*damageCalc2 / 50 + 2;
+		  						break;  
+			                        						}
+				
+				int criticalHit = (int)(Math.random()*16) ;
+				
+				if(criticalHit == 15)
+					{
+						damage = damage*2;
+						userPokemon.setHp(userPokemon.getHp() - damage);
+					}
+			
+				else
+					{
+						userPokemon.setHp(userPokemon.getHp() - damage);
+					}
+						
+				
+			}
+		
+		
+		public static void winCondition()
+		{
+			if(userPokemon.getHp() <= 0)
+				{
+					System.out.println(oppPokemon.getName() + " knocked out " + userPokemon.getName() + "! Game Over!");
+					System.exit(0);
+				}
+			
+			else if(oppPokemon.getHp() <= 0)
+			{
+					System.out.println(userPokemon.getName() + " knocked out " + oppPokemon.getName() + "! You Win!");
+					System.exit(0);
+			}
+			
 		}
 		
-
 	}
